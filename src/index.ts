@@ -1,12 +1,15 @@
-// Express server + MCP transport setup
 import "dotenv/config";
 import express from "express";
 import type { Request, Response } from "express";
 import { randomUUID } from "crypto";
-import { createCodeAnalysisMcpServer } from "./code-analysis/server";
+import { createCodeAnalysisMcpServer } from "./code-analysis/server.js";
+import { createBoilerplateGenServer } from "./boilerplate-gen/server.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { isInitializeRequest } from "@modelcontextprotocol/sdk/types.js";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
+// --- Streamable HTTP Server for code-analysis ---
 const app = express();
 app.use(express.json());
 
@@ -46,7 +49,7 @@ app.post("/mcp", async (req: Request, res: Response) => {
     // Clean up closed sessions
     transport.onclose = () => {
       if (transport.sessionId) {
-        console.log("❌ Session closed:", transport.sessionId);
+        console.warn("❌ Session closed:", transport.sessionId);
         delete transports[transport.sessionId];
       }
     };
@@ -98,5 +101,13 @@ app.delete("/mcp", (req, res, next) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 MCP server listening on http://localhost:${PORT}/mcp`);
+  console.warn(`🚀 HTTP MCP server listening on http://localhost:${PORT}/mcp`);
 });
+
+// --- STDIO Server for boilerplate-gen ---
+(async () => {
+  const stdioTransport = new StdioServerTransport();
+  const boilerplateServer: McpServer = await createBoilerplateGenServer();
+  await boilerplateServer.connect(stdioTransport);
+  console.warn("🚀 STDIO MCP server ready for CLI clients");
+})();

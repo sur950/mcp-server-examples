@@ -52,6 +52,9 @@ npm install
 
 This opens the **MCP Inspector UI** at `http://127.0.0.1:6274`.
 
+> 🎯 **In the Inspector, make sure to select `Streamable HTTP`** as the transport type, then set the URL to:
+> `http://localhost:3000/mcp`
+
 ---
 
 ## 🧪 Example Usage via MCP Inspector
@@ -95,6 +98,14 @@ The prompt walks the LLM through:
 
 ---
 
+## 📚 Resources
+
+| Resource Name | URI Pattern     | Description                                |
+| ------------- | --------------- | ------------------------------------------ |
+| `repo-schema` | `schema://main` | Returns tree structure of initialized repo |
+
+---
+
 ## 📁 Internal Folder Structure
 
 ```bash
@@ -103,5 +114,7 @@ code-analysis/
 ├── prompt.ts      # Prompt definition for LLM agents
 ├── utils.ts       # Gitignore parsing, reader helpers
 ├── server.ts      # MCP server with registration logic
-└── README.md      # This file
+├── resource.ts    # Resources registered (e.g., file://, schema://)
+├── assets/        # Screenshots for demo
+└── README.md
 ```

@@ -1,23 +1,22 @@
-// McpServer setup with all tools/resources
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import {
   initiRepoTool,
   getRepoInfoTool,
   getRepoStructureTool,
   readFileTool,
-} from "./tools";
-import { analyzeCodeRepository } from "./prompt";
-import { repoSchema } from "./resource";
+} from "./tools.js";
+import { analyzeCodeRepository } from "./prompt.js";
+import { repoSchema } from "./resource.js";
 
 export const createCodeAnalysisMcpServer = async () => {
-  console.log("🚀 Creating code-analysis MCP server");
+  console.warn("🚀 Creating code-analysis MCP server");
   const server = new McpServer({
     name: "code-analysis",
     version: "1.0.0",
   });
 
   // Register tools
-  console.log("🔧 Registering tools...");
+  console.warn("🔧 Registering code analysis tools...");
   server.tool(
     initiRepoTool.name,
     initiRepoTool.description,
@@ -44,7 +43,7 @@ export const createCodeAnalysisMcpServer = async () => {
   );
 
   // Register prompt
-  console.log("🧠 Registering prompts...");
+  console.warn("🧠 Registering code analysis prompts...");
   server.prompt(
     analyzeCodeRepository.name,
     analyzeCodeRepository.description,
@@ -53,7 +52,7 @@ export const createCodeAnalysisMcpServer = async () => {
   );
 
   // Register Resources
-  console.log("📦 Registering resources...");
+  console.warn("📦 Registering code analysis resources...");
   server.resource(repoSchema.name, repoSchema.schema, repoSchema.handler);
 
   return server;

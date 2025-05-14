@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs/promises";
 import { existsSync, lstatSync, readdirSync, statSync } from "fs";
 import ignore from "ignore";
-import { detectLanguageByExtension } from "./file-types";
+import { detectLanguageByExtension } from "./file-types.js";
 import { ZodRawShape } from "zod";
 import { fileURLToPath } from "url";
 

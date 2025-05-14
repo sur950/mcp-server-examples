@@ -1,4 +1,4 @@
-import { getRepoRoot, getRepoStructure } from "./utils";
+import { getRepoRoot, getRepoStructure } from "./utils.js";
 
 export const repoSchema = {
   name: "repo-schema",

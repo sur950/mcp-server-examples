@@ -66,10 +66,11 @@ and connect to `http://localhost:3000/mcp` using **Streamable HTTP**.
 
 ## 🧩 Supported MCP Modules
 
-| Folder                                           | Description                          |
-| ------------------------------------------------ | ------------------------------------ |
-| [`code-analysis`](./src/code-analysis/README.md) | Analyze local repos (tree + content) |
-| *(more coming soon)*                             | ...                                  |
+| Folder                                                | Description                                          | Transport        |
+| ----------------------------------------------------- | ---------------------------------------------------- | ---------------- |
+| [`code-analysis`](./src/code-analysis/README.md)      | Analyze and explore local code repositories          | Streamable HTTP  |
+| [`boilerplate-gen`](./src/boilerplate-gen/README.md)  | Generate starter codebases and incrementally add features | STDIO            |
+| *(more coming soon)*                                  | ...                                                  | ...              |
 
 ---
 

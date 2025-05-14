@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { makeZodRaw } from "./utils";
+import { makeZodRaw } from "./utils.js";
 
 export const analyzeCodeRepository = {
   name: "analyze_code_repository",
